@@ -48,7 +48,7 @@
 #ifndef GUI_APP_H
 #define GUI_APP_H
 
-void GRAPHICS_MainTask(void);
+void GRAPHICS_MainTask(void const * argument);
 
 #endif /* GUI_APP_H */
 

@@ -50,7 +50,7 @@
 extern  WM_HWIN CreateWindow(void);  
   
 
-void GRAPHICS_MainTask(void) {
+void GRAPHICS_MainTask(void const * argument) {
 
   /* 2- Create a Window using GUIBuilder */
   CreateWindow(); 

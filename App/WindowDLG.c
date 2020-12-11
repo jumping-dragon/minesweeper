@@ -20,8 +20,144 @@
 
 // USER START (Optionally insert additional includes)
 // USER END
-
+#define _SVID_SOURCE
 #include "DIALOG.h"
+#include "main.h"
+#include "cmsis_os.h"
+#include <string.h>
+#include <stdlib.h>
+
+enum operand_sign{Idle, Plus, Minus, Times, Divide}operand;
+
+double string2double(char a[]) {
+  int digit;
+  double n = 0;
+  int start_rational = 0;
+  const double zeroarray[] = { 1, 0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001, 0.0000001 };
+
+  for (digit = 0; a[digit] != '\0'; digit++ ) {
+    if(a[digit] == 46){
+      start_rational = 1;
+    }
+    else{
+      if(start_rational > 0){
+        n = n + zeroarray[start_rational] * ( a[digit] - 48 );
+        start_rational++;
+        printf("%c * %d\r\n",a[digit],start_rational);
+      }
+      else{
+        n = n * 10 + a[digit] - 48;
+      }   
+    }
+  }
+  printf("\r\n");
+  return n;
+}
+
+void shortener(char * a){
+  int j = 0;
+  for(int i = 0; a[i] != '\0'; i++){
+    if(a[i] > 46){
+      a[j] = a[i];
+      j++;
+      // printf("\r\n%c\r\n",a[j]);
+    }
+  }
+}
+
+void copyChar(char * a,char * b){
+  for(int i = 0; a[i] != '\0'; i++){
+    b[i] = a[i];
+  }
+}
+
+int check_rat(char * a){
+  for(int i = 0; a[i] != '\0'; i++){
+    if(a[i] == 46){
+      return 1;
+    }
+  }
+  return 0;
+}
+
+
+void rounder(char * a){
+  int j = 0;
+  for(int i = 0; a[i] != '\0'; i++){
+    if(i + 1 == 10 && a[i+1] - 48 > 5){
+      a[j] = a[i] + 1;
+      j++;
+      // printf("\r\nbigger%c\r\n",a[j]);
+    }
+    else{
+      a[j] = a[i];
+      j++;
+      // printf("\r\n%c\r\n",a[j]);
+    }
+  }
+}
+
+void calculate(char first_digit[],char second_digit[], int operand, int isFirstRational, int isSecondRational,char * buffer){
+  double results=0;
+  char result[100];
+  double c_first_digit = string2double(first_digit);
+  double c_second_digit = string2double(second_digit);
+
+  printf("%s",first_digit);
+
+  switch(operand){
+    case Plus:
+      results= c_first_digit + c_second_digit;
+      gcvt(results,sizeof(results) + 4,buffer);
+      gcvt(results,sizeof(results) + 4,result);
+      printf(" + ");
+      break;
+    case Minus:
+      results = c_first_digit - c_second_digit;
+      if(isFirstRational || isSecondRational){
+        gcvt(results,sizeof(results),buffer);
+        gcvt(results,sizeof(results),result);
+      }
+      else{
+        gcvt(results,sizeof(results) + 4,buffer);
+        gcvt(results,sizeof(results) + 4,result);
+      }
+      printf(" - ");
+      break;
+    case Times:
+      results= c_first_digit * c_second_digit;
+      gcvt(results,10,buffer);
+      gcvt(results,10,result);
+      if(results > 10000000000){
+        printf("more than 10 digits");
+        shortener(buffer);
+        shortener(result);
+      }
+      printf(" * ");
+      break;
+    case Divide: 
+      if(c_second_digit != 0){
+        results= c_first_digit / c_second_digit;
+        gcvt(results,10,buffer);
+        gcvt(results,10,result);
+        rounder(buffer);
+        rounder(result);
+      }
+      else{
+        sprintf(buffer,"error");
+      }
+      // gcvt(results,sizeof(results),buffer);
+      // gcvt(results,sizeof(results),result);
+      printf(" / ");
+      break;
+    default:
+      printf(" idle ");
+      break;
+  }
+  printf("%s",second_digit);
+
+  printf(" = %s\r\n",result);
+}
 
 /*********************************************************************
 *
@@ -32,7 +168,7 @@
 #define ID_WINDOW_0            (GUI_ID_USER + 0x00)
 #define ID_BUTTON_0            (GUI_ID_USER + 0x01)
 #define ID_BUTTON_1            (GUI_ID_USER + 0x05)
-#define ID_EDIT_0            (GUI_ID_USER + 0x06)
+#define ID_EDIT_0              (GUI_ID_USER + 0x06)
 #define ID_BUTTON_2            (GUI_ID_USER + 0x07)
 #define ID_BUTTON_3            (GUI_ID_USER + 0x08)
 #define ID_BUTTON_4            (GUI_ID_USER + 0x09)
@@ -41,16 +177,16 @@
 #define ID_BUTTON_7            (GUI_ID_USER + 0x0C)
 #define ID_BUTTON_8            (GUI_ID_USER + 0x0D)
 #define ID_BUTTON_9            (GUI_ID_USER + 0x0E)
-#define ID_BUTTON_10            (GUI_ID_USER + 0x0F)
-#define ID_BUTTON_11            (GUI_ID_USER + 0x10)
-#define ID_BUTTON_12            (GUI_ID_USER + 0x11)
-#define ID_BUTTON_13            (GUI_ID_USER + 0x12)
-#define ID_BUTTON_14            (GUI_ID_USER + 0x13)
-#define ID_BUTTON_15            (GUI_ID_USER + 0x14)
-#define ID_BUTTON_16            (GUI_ID_USER + 0x15)
-#define ID_BUTTON_17            (GUI_ID_USER + 0x16)
-#define ID_TEXT_0            (GUI_ID_USER + 0x17)
-#define ID_TEXT_1            (GUI_ID_USER + 0x18)
+#define ID_BUTTON_10           (GUI_ID_USER + 0x0F)
+#define ID_BUTTON_11           (GUI_ID_USER + 0x10)
+#define ID_BUTTON_12           (GUI_ID_USER + 0x11)
+#define ID_BUTTON_13           (GUI_ID_USER + 0x12)
+#define ID_BUTTON_14           (GUI_ID_USER + 0x13)
+#define ID_BUTTON_15           (GUI_ID_USER + 0x14)
+#define ID_BUTTON_16           (GUI_ID_USER + 0x15)
+#define ID_BUTTON_17           (GUI_ID_USER + 0x16)
+#define ID_TEXT_0              (GUI_ID_USER + 0x17)
+#define ID_TEXT_1              (GUI_ID_USER + 0x18)
 
 
 // USER START (Optionally insert additional defines)
@@ -70,6 +206,7 @@
 *
 *       _aDialogCreate
 */
+
 static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
   { WINDOW_CreateIndirect, "Window", ID_WINDOW_0, 2, 0, 480, 272, 0, 0x0, 0 },
   { BUTTON_CreateIndirect, "Button", ID_BUTTON_0, 37, 69, 80, 40, 0, 0x0, 0 },
@@ -111,10 +248,24 @@ static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
 *
 *       _cbDialog
 */
+
+
 static void _cbDialog(WM_MESSAGE * pMsg) {
   WM_HWIN hItem;
   int     NCode;
   int     Id;
+  static char buffer[100] = {};
+  static char first_digit[11] = {};
+  static char second_digit[11] = {};
+  
+  int first_digit_len = strlen(first_digit);
+  int second_digit_len = strlen(second_digit);
+  static int result_printed = 0;
+
+  // Conditionals:
+  static int isFirstRational = 0;
+  static int isSecondRational = 0;
+
   // USER START (Optionally insert additional variables)
   // USER END
 
@@ -137,6 +288,7 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     EDIT_SetText(hItem, "123");
     EDIT_SetTextAlign(hItem, GUI_TA_RIGHT | GUI_TA_VCENTER);
     EDIT_SetFont(hItem, GUI_FONT_24_ASCII);
+    EDIT_SetMaxLen(hItem,10);
     //
     // Initialization of 'Button'
     //
@@ -237,282 +389,385 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     Id    = WM_GetId(pMsg->hWinSrc);
     NCode = pMsg->Data.v;
     switch(Id) {
-    case ID_BUTTON_0: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
+      case ID_BUTTON_0: // 0
+        switch(NCode) {
+        case WM_NOTIFICATION_CLICKED:
+          if(result_printed){
+            isFirstRational = 0;
+            isSecondRational = 0;
+            operand = Idle;
+            result_printed = 0;
+            memset(first_digit,0,sizeof(first_digit));
+            memset(second_digit,0,sizeof(second_digit));
+            memset(buffer,0,sizeof(buffer));
+          }
+          else if(first_digit_len >= 1 && operand > 0 && second_digit_len + 1 < sizeof(second_digit)){
+            if(second_digit_len >= 1){
+              BUTTON_GetText(pMsg->hWinSrc,&second_digit[second_digit_len],sizeof(second_digit));
+            }
+            else if(isSecondRational){
+              BUTTON_GetText(pMsg->hWinSrc,&second_digit[second_digit_len],sizeof(second_digit));
+            }
+            else{
+
+            }
+          }
+          else if(first_digit_len + 1 < sizeof(first_digit) && operand == 0){
+            if(first_digit_len >= 1){
+              BUTTON_GetText(pMsg->hWinSrc,&first_digit[first_digit_len],sizeof(first_digit));
+            }
+            else if(isFirstRational){
+              BUTTON_GetText(pMsg->hWinSrc,&first_digit[first_digit_len],sizeof(first_digit));
+            }
+            else{
+
+            }
+          }
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        case WM_NOTIFICATION_RELEASED:
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        // USER START (Optionally insert additional code for further notification handling)
         // USER END
+        }
         break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
+      case ID_BUTTON_11: // 00
+        switch(NCode) {
+        case WM_NOTIFICATION_CLICKED:
+          if(result_printed){
+            isFirstRational = 0;
+            isSecondRational = 0;
+            operand = Idle;
+            result_printed = 0;
+            memset(first_digit,0,sizeof(first_digit));
+            memset(second_digit,0,sizeof(second_digit));
+            memset(buffer,0,sizeof(buffer));
+          }
+          else if(first_digit_len >= 1 && operand > 0 && second_digit_len + 2 < sizeof(second_digit)){
+            if(second_digit_len >= 1){
+              BUTTON_GetText(pMsg->hWinSrc,&second_digit[second_digit_len],sizeof(second_digit));
+            }
+            else if(isSecondRational){
+              BUTTON_GetText(pMsg->hWinSrc,&second_digit[second_digit_len],sizeof(second_digit));
+            }
+            else{
+
+            }
+          }
+          else if(first_digit_len + 2 < sizeof(first_digit) && operand == 0){
+            if(first_digit_len >= 1){
+              BUTTON_GetText(pMsg->hWinSrc,&first_digit[first_digit_len],sizeof(first_digit));
+            }
+            else if(isFirstRational){
+              BUTTON_GetText(pMsg->hWinSrc,&first_digit[first_digit_len],sizeof(first_digit));
+            }
+            else{
+
+            }
+          }
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        case WM_NOTIFICATION_RELEASED:
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        // USER START (Optionally insert additional code for further notification handling)
         // USER END
+        }
         break;
-      // USER START (Optionally insert additional code for further notification handling)
+      case ID_BUTTON_1: // 3
+      case ID_BUTTON_2: // 6
+      case ID_BUTTON_3: // 9
+      case ID_BUTTON_4: // 1
+      case ID_BUTTON_5: // 4
+      case ID_BUTTON_6: // 7
+      case ID_BUTTON_8: // 2
+      case ID_BUTTON_9: // 5
+      case ID_BUTTON_10: // 8
+        switch(NCode) {
+        case WM_NOTIFICATION_CLICKED:
+          if(result_printed){
+            isFirstRational = 0;
+            isSecondRational = 0;
+            operand = Idle;
+            result_printed = 0;
+            memset(first_digit,0,sizeof(first_digit));
+            memset(second_digit,0,sizeof(second_digit));
+            memset(buffer,0,sizeof(buffer));
+
+            BUTTON_GetText(pMsg->hWinSrc,&first_digit[0],sizeof(first_digit));
+          }
+          else if(first_digit_len >= 1 && operand > 0 && second_digit_len + 1 < sizeof(second_digit)){
+            BUTTON_GetText(pMsg->hWinSrc,&second_digit[second_digit_len],sizeof(second_digit));
+          }
+          else if(operand == 0 && first_digit_len + 1 < sizeof(first_digit)){
+            BUTTON_GetText(pMsg->hWinSrc,&first_digit[first_digit_len],sizeof(first_digit));
+          }
+          else{
+
+          }
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        case WM_NOTIFICATION_RELEASED:
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        // USER START (Optionally insert additional code for further notification handling)
+        // USER END
+        }
+        break;
+      case ID_EDIT_0: // Notifications sent by 'Edit'
+        switch(NCode) {
+        case WM_NOTIFICATION_CLICKED:
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        case WM_NOTIFICATION_RELEASED:
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        case WM_NOTIFICATION_VALUE_CHANGED:
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        // USER START (Optionally insert additional code for further notification handling)
+        // USER END
+        }
+        break;
+      case ID_BUTTON_7: // .
+        switch(NCode) {
+        case WM_NOTIFICATION_CLICKED:
+          if(first_digit_len >= 1 && operand > 0){
+            if(!isSecondRational){
+              isSecondRational = 1;
+              if(second_digit_len >= 1){
+                BUTTON_GetText(pMsg->hWinSrc,&second_digit[second_digit_len],sizeof(second_digit));
+              }
+              else{
+                strcat(second_digit,"0");
+                BUTTON_GetText(pMsg->hWinSrc,&second_digit[second_digit_len+1],sizeof(second_digit));
+              }
+            }
+          }
+          else{
+            if(!isFirstRational){
+              isFirstRational = 1;
+              if(first_digit_len >= 1){
+                BUTTON_GetText(pMsg->hWinSrc,&first_digit[first_digit_len],sizeof(first_digit));
+              }
+              else{
+                strcat(first_digit,"0");
+                BUTTON_GetText(pMsg->hWinSrc,&first_digit[first_digit_len+1],sizeof(first_digit));
+              }
+            }
+          }
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        case WM_NOTIFICATION_RELEASED:
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        // USER START (Optionally insert additional code for further notification handling)
+        // USER END
+        }
+        break;
+      case ID_BUTTON_12: // +
+        switch(NCode) {
+        case WM_NOTIFICATION_CLICKED:
+          if(result_printed){
+            if(check_rat(buffer)){
+              isFirstRational = 1;
+            }
+            copyChar(buffer, first_digit);
+            isSecondRational = 0;
+            operand = Plus;
+            result_printed = 0;
+            memset(second_digit,0,sizeof(second_digit));
+            memset(buffer,0,sizeof(buffer));
+          }
+          else if(first_digit_len >= 1){
+            operand = Plus;
+          } 
+          else{
+          }
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        case WM_NOTIFICATION_RELEASED:
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        // USER START (Optionally insert additional code for further notification handling)
+        // USER END
+        }
+        break;
+      case ID_BUTTON_13: // -
+        switch(NCode) {
+        case WM_NOTIFICATION_CLICKED:
+          if(result_printed){
+            if(check_rat(buffer)){
+              isFirstRational = 1;
+            }
+            copyChar(buffer, first_digit);
+            isSecondRational = 0;
+            operand = Minus;
+            result_printed = 0;
+            memset(second_digit,0,sizeof(second_digit));
+            memset(buffer,0,sizeof(buffer));
+          }
+          else if(first_digit_len >= 1){
+            operand = Minus;
+          }
+          else{
+          }
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        case WM_NOTIFICATION_RELEASED:
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        // USER START (Optionally insert additional code for further notification handling)
+        // USER END
+        }
+        break;
+      case ID_BUTTON_14: // *
+        switch(NCode) {
+        case WM_NOTIFICATION_CLICKED:
+          if(result_printed){
+            if(check_rat(buffer)){
+              isFirstRational = 1;
+            }
+            copyChar(buffer, first_digit);
+            isSecondRational = 0;
+            operand = Times;
+            result_printed = 0;
+            memset(second_digit,0,sizeof(second_digit));
+            memset(buffer,0,sizeof(buffer));
+          }
+          else if(first_digit_len >= 1){
+            operand = Times;
+          }
+          else{
+          }
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        case WM_NOTIFICATION_RELEASED:
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        // USER START (Optionally insert additional code for further notification handling)
+        // USER END
+        }
+        break;
+      case ID_BUTTON_15: // /
+        switch(NCode) {
+        case WM_NOTIFICATION_CLICKED:
+          if(result_printed){
+            // if(check_rat(buffer)){
+            //   isFirstRational = 1;
+            // }
+            // copyChar(buffer, first_digit);
+            // isSecondRational = 0;
+            // operand = Divide;
+            // result_printed = 0;
+            // memset(second_digit,0,sizeof(second_digit));
+            // memset(buffer,0,sizeof(buffer));
+          }
+          else if(first_digit_len >= 1){
+            operand = Divide;
+          }
+          else{
+          }
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        case WM_NOTIFICATION_RELEASED:
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        // USER START (Optionally insert additional code for further notification handling)
+        // USER END
+        }
+        break;
+      case ID_BUTTON_16: // Clr
+        switch(NCode) {
+        case WM_NOTIFICATION_CLICKED:
+          isFirstRational = 0;
+          isSecondRational = 0;
+          operand = Idle;
+          result_printed = 0;
+          memset(first_digit,0,sizeof(first_digit));
+          memset(second_digit,0,sizeof(second_digit));
+          memset(buffer,0,sizeof(buffer));
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        case WM_NOTIFICATION_RELEASED:
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        // USER START (Optionally insert additional code for further notification handling)
+        // USER END
+        }
+        break;
+      case ID_BUTTON_17: // =
+        switch(NCode) {
+        case WM_NOTIFICATION_CLICKED:
+          if(first_digit_len >= 1 && second_digit_len >= 1){
+            calculate(first_digit,second_digit,operand,isFirstRational,isSecondRational,buffer);
+          }
+          else if(first_digit_len >= 1 && operand > 0){
+            char mockZero[] = {"0"};
+            calculate(first_digit,mockZero,operand,isFirstRational,0,buffer);
+          }
+          else if(operand == 0){
+            sprintf(buffer,"0");
+          }
+          result_printed = 1;
+          
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        case WM_NOTIFICATION_RELEASED:
+          // USER START (Optionally insert code for reacting on notification message)
+          // USER END
+          break;
+        // USER START (Optionally insert additional code for further notification handling)
+        // USER END
+        }
+        break;
+      // USER START (Optionally insert additional code for further Ids)
       // USER END
       }
-      break;
-    case ID_BUTTON_1: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
+
+      if(result_printed){
+
       }
-      break;
-    case ID_EDIT_0: // Notifications sent by 'Edit'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_VALUE_CHANGED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
+      else if(strlen(first_digit) < 1){
+        sprintf(buffer,"0");
       }
-      break;
-    case ID_BUTTON_2: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
+      else if(strlen(second_digit) < 1){
+        sprintf(buffer,"%s",first_digit);
       }
-      break;
-    case ID_BUTTON_3: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
+      else {
+        sprintf(buffer,"%s",second_digit);
       }
+
+      hItem = WM_GetDialogItem(pMsg->hWin, ID_EDIT_0);
+      EDIT_SetText(hItem, buffer);
+      // printf("%s",buffer);
+      // printf("first:%s ,operand %d,second %s \r\n",first_digit,operand,second_digit);
       break;
-    case ID_BUTTON_4: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
-      }
-      break;
-    case ID_BUTTON_5: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
-      }
-      break;
-    case ID_BUTTON_6: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
-      }
-      break;
-    case ID_BUTTON_7: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
-      }
-      break;
-    case ID_BUTTON_8: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
-      }
-      break;
-    case ID_BUTTON_9: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
-      }
-      break;
-    case ID_BUTTON_10: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
-      }
-      break;
-    case ID_BUTTON_11: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
-      }
-      break;
-    case ID_BUTTON_12: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
-      }
-      break;
-    case ID_BUTTON_13: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
-      }
-      break;
-    case ID_BUTTON_14: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
-      }
-      break;
-    case ID_BUTTON_15: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
-      }
-      break;
-    case ID_BUTTON_16: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
-      }
-      break;
-    case ID_BUTTON_17: // Notifications sent by 'Button'
-      switch(NCode) {
-      case WM_NOTIFICATION_CLICKED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      case WM_NOTIFICATION_RELEASED:
-        // USER START (Optionally insert code for reacting on notification message)
-        // USER END
-        break;
-      // USER START (Optionally insert additional code for further notification handling)
-      // USER END
-      }
-      break;
-    // USER START (Optionally insert additional code for further Ids)
+    // USER START (Optionally insert additional message handling)
     // USER END
-    }
-    break;
-  // USER START (Optionally insert additional message handling)
-  // USER END
   default:
     WM_DefaultProc(pMsg);
     break;
