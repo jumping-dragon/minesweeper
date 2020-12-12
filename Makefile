@@ -13,7 +13,7 @@
 ######################################
 # target
 ######################################
-TARGET = Calculator
+TARGET = Minesweeper
 
 
 ######################################
@@ -45,7 +45,8 @@ Src/STemwin_wrapper.c \
 Src/stm32f7xx_it.c \
 Src/stm32f7xx_hal_msp.c \
 Src/stm32f7xx_hal_timebase_tim.c \
-App/WindowDLG.c \
+App/FormWindowDLG.c \
+App/GameWindowDLG.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma2d.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc_ex.c \
@@ -173,7 +174,8 @@ C_INCLUDES =  \
 -IDrivers/CMSIS/Device/ST/STM32F7xx/Include \
 -IMiddlewares/ST/STemWin/inc \
 -IDrivers/CMSIS/Include \
--IDrivers/STM32746G-Discovery
+-IDrivers/STM32746G-Discovery \
+-IApp
 
 
 # compile gcc flags

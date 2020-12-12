@@ -47,13 +47,15 @@
 #include "main.h"
 
 #include "DIALOG.h"
-extern  WM_HWIN CreateWindow(void);  
-  
+extern WM_HWIN CreateWindow1(void);
+extern WM_HWIN CreateWindow2(void);
 
 void GRAPHICS_MainTask(void const * argument) {
-
   /* 2- Create a Window using GUIBuilder */
-  CreateWindow(); 
+  WM_HWIN window1_instance = CreateWindow1();
+  printf("RUN2\r\n");
+  WM_HWIN window2_instance = CreateWindow2();
+  // WM_HideWindow(window2_instance);
  
 /* USER CODE BEGIN GRAPHICS_MainTask */
  /* User can implement his graphic application here */
