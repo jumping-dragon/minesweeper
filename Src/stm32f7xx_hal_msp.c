@@ -82,87 +82,6 @@ void HAL_MspInit(void)
 }
 
 /**
-* @brief ADC MSP Initialization
-* This function configures the hardware resources used in this example
-* @param hadc: ADC handle pointer
-* @retval None
-*/
-void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
-{
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if(hadc->Instance==ADC3)
-  {
-  /* USER CODE BEGIN ADC3_MspInit 0 */
-
-  /* USER CODE END ADC3_MspInit 0 */
-    /* Peripheral clock enable */
-    __HAL_RCC_ADC3_CLK_ENABLE();
-  
-    __HAL_RCC_GPIOF_CLK_ENABLE();
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-    /**ADC3 GPIO Configuration    
-    PF7     ------> ADC3_IN5
-    PF6     ------> ADC3_IN4
-    PF10     ------> ADC3_IN8
-    PF9     ------> ADC3_IN7
-    PF8     ------> ADC3_IN6
-    PA0/WKUP     ------> ADC3_IN0 
-    */
-    GPIO_InitStruct.Pin = ARDUINO_A4_Pin|ARDUINO_A5_Pin|ARDUINO_A1_Pin|ARDUINO_A2_Pin 
-                          |ARDUINO_A3_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
-
-    GPIO_InitStruct.Pin = ARDUINO_A0_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(ARDUINO_A0_GPIO_Port, &GPIO_InitStruct);
-
-  /* USER CODE BEGIN ADC3_MspInit 1 */
-
-  /* USER CODE END ADC3_MspInit 1 */
-  }
-
-}
-
-/**
-* @brief ADC MSP De-Initialization
-* This function freeze the hardware resources used in this example
-* @param hadc: ADC handle pointer
-* @retval None
-*/
-void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
-{
-  if(hadc->Instance==ADC3)
-  {
-  /* USER CODE BEGIN ADC3_MspDeInit 0 */
-
-  /* USER CODE END ADC3_MspDeInit 0 */
-    /* Peripheral clock disable */
-    __HAL_RCC_ADC3_CLK_DISABLE();
-  
-    /**ADC3 GPIO Configuration    
-    PF7     ------> ADC3_IN5
-    PF6     ------> ADC3_IN4
-    PF10     ------> ADC3_IN8
-    PF9     ------> ADC3_IN7
-    PF8     ------> ADC3_IN6
-    PA0/WKUP     ------> ADC3_IN0 
-    */
-    HAL_GPIO_DeInit(GPIOF, ARDUINO_A4_Pin|ARDUINO_A5_Pin|ARDUINO_A1_Pin|ARDUINO_A2_Pin 
-                          |ARDUINO_A3_Pin);
-
-    HAL_GPIO_DeInit(ARDUINO_A0_GPIO_Port, ARDUINO_A0_Pin);
-
-  /* USER CODE BEGIN ADC3_MspDeInit 1 */
-
-  /* USER CODE END ADC3_MspDeInit 1 */
-  }
-
-}
-
-/**
 * @brief CRC MSP Initialization
 * This function configures the hardware resources used in this example
 * @param hcrc: CRC handle pointer
@@ -390,45 +309,6 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef* heth)
 
 }
 
-/**
-* @brief ETH MSP De-Initialization
-* This function freeze the hardware resources used in this example
-* @param heth: ETH handle pointer
-* @retval None
-*/
-void HAL_ETH_MspDeInit(ETH_HandleTypeDef* heth)
-{
-  if(heth->Instance==ETH)
-  {
-  /* USER CODE BEGIN ETH_MspDeInit 0 */
-
-  /* USER CODE END ETH_MspDeInit 0 */
-    /* Peripheral clock disable */
-    __HAL_RCC_ETH_CLK_DISABLE();
-  
-    /**ETH GPIO Configuration    
-    PG14     ------> ETH_TXD1
-    PG13     ------> ETH_TXD0
-    PG11     ------> ETH_TX_EN
-    PC1     ------> ETH_MDC
-    PA1     ------> ETH_REF_CLK
-    PC4     ------> ETH_RXD0
-    PA2     ------> ETH_MDIO
-    PC5     ------> ETH_RXD1
-    PA7     ------> ETH_CRS_DV 
-    */
-    HAL_GPIO_DeInit(GPIOG, RMII_TXD1_Pin|RMII_TXD0_Pin|RMII_TX_EN_Pin);
-
-    HAL_GPIO_DeInit(GPIOC, RMII_MDC_Pin|RMII_RXD0_Pin|RMII_RXD1_Pin);
-
-    HAL_GPIO_DeInit(GPIOA, RMII_REF_CLK_Pin|RMII_MDIO_Pin|RMII_CRS_DV_Pin);
-
-  /* USER CODE BEGIN ETH_MspDeInit 1 */
-
-  /* USER CODE END ETH_MspDeInit 1 */
-  }
-
-}
 
 /**
 * @brief I2C MSP Initialization

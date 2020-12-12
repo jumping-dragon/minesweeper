@@ -44,13 +44,10 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc3;
 
 CRC_HandleTypeDef hcrc;
 
 DCMI_HandleTypeDef hdcmi;
-
-ETH_HandleTypeDef heth;
 
 I2C_HandleTypeDef hi2c1;
 I2C_HandleTypeDef hi2c3;
@@ -76,9 +73,9 @@ TIM_HandleTypeDef htim8;
 TIM_HandleTypeDef htim12;
 
 UART_HandleTypeDef huart1;
-UART_HandleTypeDef huart6;
+// UART_HandleTypeDef huart6;
 
-HCD_HandleTypeDef hhcd_USB_OTG_FS;
+// HCD_HandleTypeDef hhcd_USB_OTG_FS;
 
 osThreadId defaultTaskHandle;
 osThreadId touchTaskHandle;
@@ -89,10 +86,8 @@ osThreadId touchTaskHandle;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_ADC3_Init(void);
 static void MX_CRC_Init(void);
 static void MX_DCMI_Init(void);
-static void MX_ETH_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_I2C3_Init(void);
 static void MX_QUADSPI_Init(void);
@@ -108,8 +103,8 @@ static void MX_TIM5_Init(void);
 static void MX_TIM8_Init(void);
 static void MX_TIM12_Init(void);
 static void MX_USART1_UART_Init(void);
-static void MX_USART6_UART_Init(void);
-static void MX_USB_OTG_FS_HCD_Init(void);
+// static void MX_USART6_UART_Init(void);
+// static void MX_USB_OTG_FS_HCD_Init(void);
 extern void GRAPHICS_HW_Init(void);
 extern void GRAPHICS_Init(void);
 extern void GRAPHICS_MainTask(void const * argument);
@@ -153,17 +148,15 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_ADC3_Init();
   MX_CRC_Init();
-  MX_DCMI_Init();
-  MX_ETH_Init();
-  MX_I2C1_Init();
-  MX_I2C3_Init();
-  MX_QUADSPI_Init();
+  // MX_DCMI_Init();
+  // MX_I2C1_Init();
+  // MX_I2C3_Init();
+  MX_QUADSPI_Init(); //needed
   MX_RTC_Init();
-  MX_SAI2_Init();
-  MX_SDMMC1_SD_Init();
-  MX_SPDIFRX_Init();
+  // MX_SAI2_Init();
+  MX_SDMMC1_SD_Init(); //needed
+  MX_SPDIFRX_Init(); //needed
   MX_SPI2_Init();
   MX_TIM1_Init();
   MX_TIM2_Init();
@@ -172,8 +165,8 @@ int main(void)
   MX_TIM8_Init();
   MX_TIM12_Init();
   MX_USART1_UART_Init();
-  MX_USART6_UART_Init();
-  MX_USB_OTG_FS_HCD_Init();
+  // MX_USART6_UART_Init();
+  // MX_USB_OTG_FS_HCD_Init();
   /* USER CODE BEGIN 2 */
 
 	BSP_TS_Init(480, 272);
@@ -331,56 +324,6 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief ADC3 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_ADC3_Init(void)
-{
-
-  /* USER CODE BEGIN ADC3_Init 0 */
-
-  /* USER CODE END ADC3_Init 0 */
-
-  ADC_ChannelConfTypeDef sConfig = {0};
-
-  /* USER CODE BEGIN ADC3_Init 1 */
-
-  /* USER CODE END ADC3_Init 1 */
-  /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion) 
-  */
-  hadc3.Instance = ADC3;
-  hadc3.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
-  hadc3.Init.Resolution = ADC_RESOLUTION_12B;
-  hadc3.Init.ScanConvMode = ADC_SCAN_DISABLE;
-  hadc3.Init.ContinuousConvMode = DISABLE;
-  hadc3.Init.DiscontinuousConvMode = DISABLE;
-  hadc3.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-  hadc3.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc3.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc3.Init.NbrOfConversion = 1;
-  hadc3.Init.DMAContinuousRequests = DISABLE;
-  hadc3.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
-  if (HAL_ADC_Init(&hadc3) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time. 
-  */
-  sConfig.Channel = ADC_CHANNEL_4;
-  sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-  if (HAL_ADC_ConfigChannel(&hadc3, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN ADC3_Init 2 */
-
-  /* USER CODE END ADC3_Init 2 */
-
-}
-
-/**
   * @brief CRC Initialization Function
   * @param None
   * @retval None
@@ -448,47 +391,6 @@ static void MX_DCMI_Init(void)
 
 }
 
-/**
-  * @brief ETH Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_ETH_Init(void)
-{
-
-  /* USER CODE BEGIN ETH_Init 0 */
-
-  /* USER CODE END ETH_Init 0 */
-
-  /* USER CODE BEGIN ETH_Init 1 */
-
-  /* USER CODE END ETH_Init 1 */
-  heth.Instance = ETH;
-  heth.Init.AutoNegotiation = ETH_AUTONEGOTIATION_ENABLE;
-  heth.Init.PhyAddress = LAN8742A_PHY_ADDRESS;
-  heth.Init.MACAddr[0] =   0x00;
-  heth.Init.MACAddr[1] =   0x80;
-  heth.Init.MACAddr[2] =   0xE1;
-  heth.Init.MACAddr[3] =   0x00;
-  heth.Init.MACAddr[4] =   0x00;
-  heth.Init.MACAddr[5] =   0x00;
-  heth.Init.RxMode = ETH_RXPOLLING_MODE;
-  heth.Init.ChecksumMode = ETH_CHECKSUM_BY_HARDWARE;
-  heth.Init.MediaInterface = ETH_MEDIA_INTERFACE_RMII;
-
-  /* USER CODE BEGIN MACADDRESS */
-    
-  /* USER CODE END MACADDRESS */
-
-  if (HAL_ETH_Init(&heth) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN ETH_Init 2 */
-
-  /* USER CODE END ETH_Init 2 */
-
-}
 
 /**
   * @brief I2C1 Initialization Function
@@ -1272,72 +1174,6 @@ static void MX_USART1_UART_Init(void)
   /* USER CODE BEGIN USART1_Init 2 */
 
   /* USER CODE END USART1_Init 2 */
-
-}
-
-/**
-  * @brief USART6 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_USART6_UART_Init(void)
-{
-
-  /* USER CODE BEGIN USART6_Init 0 */
-
-  /* USER CODE END USART6_Init 0 */
-
-  /* USER CODE BEGIN USART6_Init 1 */
-
-  /* USER CODE END USART6_Init 1 */
-  huart6.Instance = USART6;
-  huart6.Init.BaudRate = 115200;
-  huart6.Init.WordLength = UART_WORDLENGTH_8B;
-  huart6.Init.StopBits = UART_STOPBITS_1;
-  huart6.Init.Parity = UART_PARITY_NONE;
-  huart6.Init.Mode = UART_MODE_TX_RX;
-  huart6.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart6.Init.OverSampling = UART_OVERSAMPLING_16;
-  huart6.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-  huart6.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
-  if (HAL_UART_Init(&huart6) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN USART6_Init 2 */
-
-  /* USER CODE END USART6_Init 2 */
-
-}
-
-/**
-  * @brief USB_OTG_FS Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_USB_OTG_FS_HCD_Init(void)
-{
-
-  /* USER CODE BEGIN USB_OTG_FS_Init 0 */
-
-  /* USER CODE END USB_OTG_FS_Init 0 */
-
-  /* USER CODE BEGIN USB_OTG_FS_Init 1 */
-
-  /* USER CODE END USB_OTG_FS_Init 1 */
-  hhcd_USB_OTG_FS.Instance = USB_OTG_FS;
-  hhcd_USB_OTG_FS.Init.Host_channels = 8;
-  hhcd_USB_OTG_FS.Init.speed = HCD_SPEED_FULL;
-  hhcd_USB_OTG_FS.Init.dma_enable = DISABLE;
-  hhcd_USB_OTG_FS.Init.phy_itface = HCD_PHY_EMBEDDED;
-  hhcd_USB_OTG_FS.Init.Sof_enable = DISABLE;
-  if (HAL_HCD_Init(&hhcd_USB_OTG_FS) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN USB_OTG_FS_Init 2 */
-
-  /* USER CODE END USB_OTG_FS_Init 2 */
 
 }
 
