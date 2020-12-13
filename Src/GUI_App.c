@@ -48,15 +48,23 @@
 
 #include "DIALOG.h"
 extern WM_HWIN CreateWindow1(void);
-extern WM_HWIN CreateWindow2(void);
+extern WM_HWIN CreateWindow2(int bombAmount);
+WM_HWIN window1_instance;
+WM_HWIN window2_instance;
 
 void GRAPHICS_MainTask(void const * argument) {
   /* 2- Create a Window using GUIBuilder */
-  WM_HWIN window1_instance = CreateWindow1();
+  window1_instance = CreateWindow1();
   printf("RUN2\r\n");
-  WM_HWIN window2_instance = CreateWindow2();
   // WM_HideWindow(window2_instance);
+
+  WM_MESSAGE Time;
+  Time.MsgId = 300;
+  Time.Data.v = 0;
+  WM_SendMessage(window2_instance,&Time);
  
+  int prescaler = 0;
+  int second = 0;
 /* USER CODE BEGIN GRAPHICS_MainTask */
  /* User can implement his graphic application here */
   /* Hello Word example */
@@ -68,7 +76,14 @@ void GRAPHICS_MainTask(void const * argument) {
 /* USER CODE END GRAPHICS_MainTask */
   while(1)
 {
-      GUI_Delay(100);
+      if(prescaler > 1000){
+        second++;
+        Time.Data.v = second;
+        WM_SendMessage(window2_instance,&Time);
+        prescaler = 0;
+      }
+      GUI_Delay(1);
+      prescaler++;
 }
 }
 

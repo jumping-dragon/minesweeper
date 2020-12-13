@@ -237,14 +237,9 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
   U32          FileSize;
   int          NCode;
   int          Id;
-  time_t timer;
-  char buffer[26];
-  struct tm* tm_info;
+  char bomb[12];
+  static char buffer[300] = "00:00\r\n";
 
-  timer = time(NULL);
-  tm_info = localtime(&timer);
-
-  strftime(buffer, 26, "%M:%S", tm_info);
   // USER START (Optionally insert additional variables)
   // USER END
 
@@ -254,7 +249,13 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     // Initialization of 'Edit'
     //
     hItem = WM_GetDialogItem(pMsg->hWin, ID_EDIT_0);
-    EDIT_SetText(hItem, "123");
+    if(pMsg->Data.v){
+      sprintf(bomb,"%d",pMsg->Data.v);
+      EDIT_SetText(hItem, bomb);
+    }
+    else{
+      EDIT_SetText(hItem, "0");
+    }
     EDIT_SetFont(hItem, GUI_FONT_16B_ASCII);
     EDIT_SetTextAlign(hItem, GUI_TA_HCENTER | GUI_TA_VCENTER);
     EDIT_SetFocussable(hItem, EDIT_CI_DISABLED);
@@ -349,6 +350,11 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     break;
   // USER START (Optionally insert additional message handling)
   // USER END
+  case 300:
+    sprintf(buffer, "%d%d:%d%d",pMsg->Data.v/600, pMsg->Data.v/60, pMsg->Data.v%60/10, pMsg->Data.v%10 );
+    hItem = WM_GetDialogItem(pMsg->hWin, ID_EDIT_1);
+    EDIT_SetText(hItem, buffer);
+    break;
   default:
     WM_DefaultProc(pMsg);
     break;
@@ -365,11 +371,26 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
 *
 *       CreateWindow2
 */
-WM_HWIN CreateWindow2(void);
-WM_HWIN CreateWindow2(void) {
-  WM_HWIN hWin;
 
-  hWin = GUI_ExecDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, WM_HBKWIN, 0, 0);
+WM_HWIN CreateWindow2(int bombAmount);
+WM_HWIN CreateWindow2(int bombAmount) {
+  WM_HWIN hWin;
+  WM_MESSAGE Initial;
+  hWin = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, WM_HBKWIN, 0, 0);
+  printf("%d",bombAmount);
+  Initial.MsgId = WM_INIT_DIALOG;
+  Initial.Data.v = bombAmount;
+  WM_SendMessage(hWin,&Initial);
+  // struct WM_MESSAGE {
+        // int MsgId;            /* type of message */
+        // WM_HWIN hWin;         /* Destination window */
+        // WM_HWIN hWinSrc;      /* Source window  */
+        // union {
+        //   const void * p;            /* Some messages need more info ... Pointer is declared "const" because some systems (M16C) have 4 byte const, byte 2 byte default ptrs */
+        //   int v;
+        //   GUI_COLOR Color;
+        // } Data;
+        // };
   return hWin;
 }
 

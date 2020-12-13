@@ -85,8 +85,8 @@ static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
   // USER END
 };
 
-extern WM_HWIN Window2(void);
-extern WM_HWIN active_window;
+extern WM_HWIN CreateWindow2(int number);
+extern WM_HWIN window2_instance;
 /*********************************************************************
 *
 *       Static code
@@ -262,7 +262,9 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
         }
         else {
           printf("%d\r\n",number);
-          GUI_EndDialog(WM_GetParent(pMsg->hWinSrc),number);
+          // GUI_EndDialog(pMsg->hWin,0);
+          // WM_HideWindow(pMsg->hWin);
+          window2_instance = CreateWindow2(number);
           // WM_MESSAGE start_game;
           // start_game.MsgId = WM_INIT_DIALOG;
           // start_game.Data.v = number;
@@ -349,7 +351,7 @@ WM_HWIN CreateWindow1(void);
 WM_HWIN CreateWindow1(void) {
   WM_HWIN hWin;
 
-  hWin = GUI_ExecDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, WM_HBKWIN, 0, 0);
+  hWin = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, WM_HBKWIN, 0, 0);
   return hWin;
 }
 
