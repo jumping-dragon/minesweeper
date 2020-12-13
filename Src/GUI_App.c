@@ -51,6 +51,7 @@ extern WM_HWIN CreateWindow1(void);
 extern WM_HWIN CreateWindow2(int bombAmount);
 WM_HWIN window1_instance;
 WM_HWIN window2_instance;
+int start_game = 0;
 
 void GRAPHICS_MainTask(void const * argument) {
   /* 2- Create a Window using GUIBuilder */
@@ -59,7 +60,7 @@ void GRAPHICS_MainTask(void const * argument) {
   // WM_HideWindow(window2_instance);
 
   WM_MESSAGE Time;
-  Time.MsgId = 300;
+  Time.MsgId = 6969;
   Time.Data.v = 0;
   WM_SendMessage(window2_instance,&Time);
  
@@ -76,7 +77,7 @@ void GRAPHICS_MainTask(void const * argument) {
 /* USER CODE END GRAPHICS_MainTask */
   while(1)
 {
-      if(prescaler > 1000){
+      if(prescaler > 1000 && start_game){
         second++;
         Time.Data.v = second;
         WM_SendMessage(window2_instance,&Time);

@@ -350,7 +350,7 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     break;
   // USER START (Optionally insert additional message handling)
   // USER END
-  case 300:
+  case 6969:
     sprintf(buffer, "%d%d:%d%d",pMsg->Data.v/600, pMsg->Data.v/60, pMsg->Data.v%60/10, pMsg->Data.v%10 );
     hItem = WM_GetDialogItem(pMsg->hWin, ID_EDIT_1);
     EDIT_SetText(hItem, buffer);

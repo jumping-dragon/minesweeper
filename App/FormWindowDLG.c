@@ -87,6 +87,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
 
 extern WM_HWIN CreateWindow2(int number);
 extern WM_HWIN window2_instance;
+extern int start_game;
 /*********************************************************************
 *
 *       Static code
@@ -265,6 +266,7 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
           // GUI_EndDialog(pMsg->hWin,0);
           // WM_HideWindow(pMsg->hWin);
           window2_instance = CreateWindow2(number);
+          start_game = 1;
           // WM_MESSAGE start_game;
           // start_game.MsgId = WM_INIT_DIALOG;
           // start_game.Data.v = number;
