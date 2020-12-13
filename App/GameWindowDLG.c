@@ -24,7 +24,11 @@
 #include "main.h"
 #include "DIALOG.h"
 #include "GameWindowDLG.h"
+#include <stdlib.h>
 #include <time.h>
+#include <string.h>
+
+extern int start_game;
 
 /*********************************************************************
 *
@@ -229,16 +233,18 @@ static const void * _GetImageById(U32 Id, U32 * pSize) {
 
 /*********************************************************************
 *
-*       _cbDialog
+*       _gameCbDialog
 */
-static void _cbDialog(WM_MESSAGE * pMsg) {
+static void _gameCbDialog(WM_MESSAGE * pMsg) {
   const void * pData;
   WM_HWIN      hItem;
   U32          FileSize;
   int          NCode;
   int          Id;
-  char bomb[12];
-  static char buffer[300] = "00:00\r\n";
+  char         bomb_amount[12];
+  int          game_map[120] = { ID_WALL };
+  static char  buffer[300] = "00:00\r\n";
+
 
   // USER START (Optionally insert additional variables)
   // USER END
@@ -248,10 +254,89 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     //
     // Initialization of 'Edit'
     //
+
     hItem = WM_GetDialogItem(pMsg->hWin, ID_EDIT_0);
     if(pMsg->Data.v){
-      sprintf(bomb,"%d",pMsg->Data.v);
-      EDIT_SetText(hItem, bomb);
+      sprintf(bomb_amount,"%d",pMsg->Data.v);
+      EDIT_SetText(hItem, bomb_amount);
+      for(int x = 0; x < pMsg->Data.v; x++){
+        int location = rand() % ( 120 );
+        game_map[location] = ID_BOMB;
+        if(location - 15 > 0 && location + 15 < 119){ // NOT BORDER TOP || BOTTOM
+          switch(location % 15){
+            case 0: // BORDER LEFT
+              game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
+              game_map[location - 14] = (game_map[location - 14] >= 10 ) ? 10 : game_map[location - 14] + 1;
+              game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
+              game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
+              game_map[location + 16] = (game_map[location + 16] >= 10 ) ? 10 : game_map[location + 16] + 1;
+              break;
+            case 14: // BORDER RIGHT
+              game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
+              game_map[location - 16] = (game_map[location - 16] >= 10 ) ? 10 : game_map[location - 16] + 1;
+              game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
+              game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
+              game_map[location + 14] = (game_map[location + 14] >= 10 ) ? 10 : game_map[location + 14] + 1;
+              break;
+            default: // NOT BORDER LEFT OR RIGHT
+              game_map[location - 14] = (game_map[location - 14] >= 10 ) ? 10 : game_map[location - 14] + 1;
+              game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
+              game_map[location - 16] = (game_map[location - 16] >= 10 ) ? 10 : game_map[location - 16] + 1;
+              game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
+              game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
+              game_map[location + 14] = (game_map[location + 14] >= 10 ) ? 10 : game_map[location + 14] + 1;
+              game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
+              game_map[location + 16] = (game_map[location + 16] >= 10 ) ? 10 : game_map[location + 16] + 1;
+              break;
+          }
+        }
+        else{
+          if(location > 51){ // BORDER BOTTOM
+            switch(location % 15){
+              case 0: // BORDER LEFT
+                game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
+                game_map[location - 14] = (game_map[location - 14] >= 10 ) ? 10 : game_map[location - 14] + 1;
+                game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
+                break;
+              case 14: // BORDER RIGHT
+                game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
+                game_map[location - 16] = (game_map[location - 16] >= 10 ) ? 10 : game_map[location - 16] + 1;
+                game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
+                break;
+              default: // NOT BORDER LEFT OR RIGHT
+                game_map[location - 14] = (game_map[location - 14] >= 10 ) ? 10 : game_map[location - 14] + 1;
+                game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
+                game_map[location - 16] = (game_map[location - 16] >= 10 ) ? 10 : game_map[location - 16] + 1;
+                game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
+                game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
+                break;
+            }
+          }
+          else{ // BORDER TOP
+            switch(location % 15){
+              case 0: // BORDER LEFT
+                game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
+                game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
+                game_map[location + 16] = (game_map[location + 16] >= 10 ) ? 10 : game_map[location + 16] + 1;
+                break;
+              case 14: // BORDER RIGHT
+                game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
+                game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
+                game_map[location + 14] = (game_map[location + 14] >= 10 ) ? 10 : game_map[location + 14] + 1;
+                break;
+              default: // NOT BORDER LEFT OR RIGHT
+                game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
+                game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
+                game_map[location + 14] = (game_map[location + 14] >= 10 ) ? 10 : game_map[location + 14] + 1;
+                game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
+                game_map[location + 16] = (game_map[location + 16] >= 10 ) ? 10 : game_map[location + 16] + 1;
+                break;
+            }
+          }
+        }
+       
+        printf("bomb at %d hehehe\r\n",location);
+      }
     }
     else{
       EDIT_SetText(hItem, "0");
@@ -275,13 +360,19 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     TEXT_SetFont(hItem, GUI_FONT_24B_ASCII);
     TEXT_SetText(hItem, "WIN");
     TEXT_SetTextColor(hItem, GUI_MAKE_COLOR(0x00BD1D00));
+
     //
     // Initialization of 'Image'
     //
     for(int x = ID_IMAGE_0; x <= ID_IMAGE_119; x++){
       hItem = WM_GetDialogItem(pMsg->hWin, x);
-      pData = _GetImageById(ID_NUMBER1, &FileSize);
+      pData = _GetImageById(ID_WALL, &FileSize);
+      // printf("[%d] = %d\r\n",x,ID_WALL);
       IMAGE_SetBMP(hItem, pData, FileSize);
+    }
+
+    for(int x = 0; x < 120; x++){
+      printf("[%d] : %d\r\n",x,game_map[x]);
     }
 
     // USER START (Optionally insert additional code for further widget initialization)
@@ -329,10 +420,132 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
       break;
     // USER START (Optionally insert additional code for further Ids)
     // USER END
-    case ID_IMAGE_0:
+    case ID_IMAGE_0 :
+    case ID_IMAGE_1 :
+    case ID_IMAGE_2 :
+    case ID_IMAGE_3 :
+    case ID_IMAGE_4 :
+    case ID_IMAGE_5 :
+    case ID_IMAGE_6 :
+    case ID_IMAGE_7 :
+    case ID_IMAGE_8 :
+    case ID_IMAGE_9 :
+    case ID_IMAGE_10 :
+    case ID_IMAGE_11 :
+    case ID_IMAGE_12 :
+    case ID_IMAGE_13 :
+    case ID_IMAGE_14 :
+    case ID_IMAGE_15 :
+    case ID_IMAGE_16 :
+    case ID_IMAGE_17 :
+    case ID_IMAGE_18 :
+    case ID_IMAGE_19 :
+    case ID_IMAGE_20 :
+    case ID_IMAGE_21 :
+    case ID_IMAGE_22 :
+    case ID_IMAGE_23 :
+    case ID_IMAGE_24 :
+    case ID_IMAGE_25 :
+    case ID_IMAGE_26 :
+    case ID_IMAGE_27 :
+    case ID_IMAGE_28 :
+    case ID_IMAGE_29 :
+    case ID_IMAGE_30 :
+    case ID_IMAGE_31 :
+    case ID_IMAGE_32 :
+    case ID_IMAGE_33 :
+    case ID_IMAGE_34 :
+    case ID_IMAGE_35 :
+    case ID_IMAGE_36 :
+    case ID_IMAGE_37 :
+    case ID_IMAGE_38 :
+    case ID_IMAGE_39 :
+    case ID_IMAGE_40 :
+    case ID_IMAGE_41 :
+    case ID_IMAGE_42 :
+    case ID_IMAGE_43 :
+    case ID_IMAGE_44 :
+    case ID_IMAGE_45 :
+    case ID_IMAGE_46 :
+    case ID_IMAGE_47 :
+    case ID_IMAGE_48 :
+    case ID_IMAGE_49 :
+    case ID_IMAGE_50 :
+    case ID_IMAGE_51 :
+    case ID_IMAGE_52 :
+    case ID_IMAGE_53 :
+    case ID_IMAGE_54 :
+    case ID_IMAGE_55 :
+    case ID_IMAGE_56 :
+    case ID_IMAGE_57 :
+    case ID_IMAGE_58 :
+    case ID_IMAGE_59 :
+    case ID_IMAGE_60 :
+    case ID_IMAGE_61 :
+    case ID_IMAGE_62 :
+    case ID_IMAGE_63 :
+    case ID_IMAGE_64 :
+    case ID_IMAGE_65 :
+    case ID_IMAGE_66 :
+    case ID_IMAGE_67 :
+    case ID_IMAGE_68 :
+    case ID_IMAGE_69 :
+    case ID_IMAGE_70 :
+    case ID_IMAGE_71 :
+    case ID_IMAGE_72 :
+    case ID_IMAGE_73 :
+    case ID_IMAGE_74 :
+    case ID_IMAGE_75 :
+    case ID_IMAGE_76 :
+    case ID_IMAGE_77 :
+    case ID_IMAGE_78 :
+    case ID_IMAGE_79 :
+    case ID_IMAGE_80 :
+    case ID_IMAGE_81 :
+    case ID_IMAGE_82 :
+    case ID_IMAGE_83 :
+    case ID_IMAGE_84 :
+    case ID_IMAGE_85 :
+    case ID_IMAGE_86 :
+    case ID_IMAGE_87 :
+    case ID_IMAGE_88 :
+    case ID_IMAGE_89 :
+    case ID_IMAGE_90 :
+    case ID_IMAGE_91 :
+    case ID_IMAGE_92 :
+    case ID_IMAGE_93 :
+    case ID_IMAGE_94 :
+    case ID_IMAGE_95 :
+    case ID_IMAGE_96 :
+    case ID_IMAGE_97 :
+    case ID_IMAGE_98 :
+    case ID_IMAGE_99 :
+    case ID_IMAGE_100 :
+    case ID_IMAGE_101 :
+    case ID_IMAGE_102 :
+    case ID_IMAGE_103 :
+    case ID_IMAGE_104 :
+    case ID_IMAGE_105 :
+    case ID_IMAGE_106 :
+    case ID_IMAGE_107 :
+    case ID_IMAGE_108 :
+    case ID_IMAGE_109 :
+    case ID_IMAGE_110 :
+    case ID_IMAGE_111 :
+    case ID_IMAGE_112 :
+    case ID_IMAGE_113 :
+    case ID_IMAGE_114 :
+    case ID_IMAGE_115 :
+    case ID_IMAGE_116 :
+    case ID_IMAGE_117 :
+    case ID_IMAGE_118 :
+    case ID_IMAGE_119 :
       switch(NCode) {
       case WM_NOTIFICATION_CLICKED:
-        printf("test\r\n");
+        hItem = WM_GetDialogItem(pMsg->hWin, Id);
+        pData = _GetImageById(ID_BLANK, &FileSize);
+        IMAGE_SetBMP(hItem, pData, FileSize);
+        start_game = !start_game;
         // USER START (Optionally insert code for reacting on notification message)
         // USER END
         break;
@@ -376,8 +589,8 @@ WM_HWIN CreateWindow2(int bombAmount);
 WM_HWIN CreateWindow2(int bombAmount) {
   WM_HWIN hWin;
   WM_MESSAGE Initial;
-  hWin = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, WM_HBKWIN, 0, 0);
-  printf("%d",bombAmount);
+  hWin = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _gameCbDialog, WM_HBKWIN, 0, 0);
+  printf("bomb amount: %d\r\n",bombAmount);
   Initial.MsgId = WM_INIT_DIALOG;
   Initial.Data.v = bombAmount;
   WM_SendMessage(hWin,&Initial);
