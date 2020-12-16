@@ -41,138 +41,131 @@ static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
   { TEXT_CreateIndirect, "Text_state", ID_TEXT_0, 190, 15, 80, 27, 0, 0x64, 0 },
   //1
     { IMAGE_CreateIndirect, "Image", ID_IMAGE_0, 45, 45, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_1, 45, 70, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_2, 45, 95, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_3, 45, 120, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_4, 45, 145, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_5, 45, 170, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_6, 45, 195, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_7, 45, 220, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_1, 70, 45, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_2, 95, 45, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_3, 120, 45, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_4, 145, 45, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_5, 170, 45, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_6, 195, 45, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_7, 220, 45, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_8, 245, 45, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_9, 270, 45, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_10, 295, 45, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_11, 320, 45, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_12, 345, 45, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_13, 370, 45, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_14, 395, 45, 25, 25, 0, 0, 0 },
   //2
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_8, 70, 45, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_9, 70, 70, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_10, 70, 95, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_11, 70, 120, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_12, 70, 145, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_13, 70, 170, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_14, 70, 195, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_15, 70, 220, 25, 25, 0, 0, 0 },
-  //3
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_16, 95, 45, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_15, 45, 70, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_16, 70, 70, 25, 25, 0, 0, 0 },
     { IMAGE_CreateIndirect, "Image", ID_IMAGE_17, 95, 70, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_18, 95, 95, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_19, 95, 120, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_20, 95, 145, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_21, 95, 170, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_22, 95, 195, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_23, 95, 220, 25, 25, 0, 0, 0 },
-  //4
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_24, 120, 45, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_25, 120, 70, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_26, 120, 95, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_27, 120, 120, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_28, 120, 145, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_29, 120, 170, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_30, 120, 195, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_31, 120, 220, 25, 25, 0, 0, 0 },
-  //5
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_32, 145, 45, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_33, 145, 70, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_18, 120, 70, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_19, 145, 70, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_20, 170, 70, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_21, 195, 70, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_22, 220, 70, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_23, 245, 70, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_24, 270, 70, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_25, 295, 70, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_26, 320, 70, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_27, 345, 70, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_28, 370, 70, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_29, 395, 70, 25, 25, 0, 0, 0 },
+  //3
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_30, 45, 95, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_31, 70, 95, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_32, 95, 95, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_33, 120, 95, 25, 25, 0, 0, 0 },
     { IMAGE_CreateIndirect, "Image", ID_IMAGE_34, 145, 95, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_35, 145, 120, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_36, 145, 145, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_37, 145, 170, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_38, 145, 195, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_39, 145, 220, 25, 25, 0, 0, 0 },
-  //6
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_40, 170, 45, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_41, 170, 70, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_42, 170, 95, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_43, 170, 120, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_44, 170, 145, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_45, 170, 170, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_46, 170, 195, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_47, 170, 220, 25, 25, 0, 0, 0 },
-  //7
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_48, 195, 45, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_49, 195, 70, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_50, 195, 95, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_35, 170, 95, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_36, 195, 95, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_37, 220, 95, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_38, 245, 95, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_39, 270, 95, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_40, 295, 95, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_41, 320, 95, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_42, 345, 95, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_43, 370, 95, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_44, 395, 95, 25, 25, 0, 0, 0 },
+  //4
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_45, 45, 120, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_46, 70, 120, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_47, 95, 120, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_48, 120, 120, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_49, 145, 120, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_50, 170, 120, 25, 25, 0, 0, 0 },
     { IMAGE_CreateIndirect, "Image", ID_IMAGE_51, 195, 120, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_52, 195, 145, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_53, 195, 170, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_54, 195, 195, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_55, 195, 220, 25, 25, 0, 0, 0 },
-  //8
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_56, 220, 45, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_57, 220, 70, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_58, 220, 95, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_59, 220, 120, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_60, 220, 145, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_61, 220, 170, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_62, 220, 195, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_63, 220, 220, 25, 25, 0, 0, 0 },
-  //9
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_64, 245, 45, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_65, 245, 70, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_66, 245, 95, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_67, 245, 120, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_52, 220, 120, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_53, 245, 120, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_54, 270, 120, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_55, 295, 120, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_56, 320, 120, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_57, 345, 120, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_58, 370, 120, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_59, 395, 120, 25, 25, 0, 0, 0 },
+  //5
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_60, 45, 145, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_61, 70, 145, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_62, 95, 145, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_63, 120, 145, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_64, 145, 145, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_65, 170, 145, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_66, 195, 145, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_67, 220, 145, 25, 25, 0, 0, 0 },
     { IMAGE_CreateIndirect, "Image", ID_IMAGE_68, 245, 145, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_69, 245, 170, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_70, 245, 195, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_71, 245, 220, 25, 25, 0, 0, 0 },
-  //10
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_72, 270, 45, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_73, 270, 70, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_74, 270, 95, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_75, 270, 120, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_76, 270, 145, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_77, 270, 170, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_78, 270, 195, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_79, 270, 220, 25, 25, 0, 0, 0 },
-  //11
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_80, 295, 45, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_81, 295, 70, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_82, 295, 95, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_83, 295, 120, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_84, 295, 145, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_69, 270, 145, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_70, 295, 145, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_71, 320, 145, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_72, 345, 145, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_73, 370, 145, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_74, 395, 145, 25, 25, 0, 0, 0 },
+  //6
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_75, 45, 170, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_76, 70, 170, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_77, 95, 170, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_78, 120, 170, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_79, 145, 170, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_80, 170, 170, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_81, 195, 170, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_82, 220, 170, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_83, 245, 170, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_84, 270, 170, 25, 25, 0, 0, 0 },
     { IMAGE_CreateIndirect, "Image", ID_IMAGE_85, 295, 170, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_86, 295, 195, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_87, 295, 220, 25, 25, 0, 0, 0 },
-  //12
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_88, 320, 45, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_89, 320, 70, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_90, 320, 95, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_91, 320, 120, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_92, 320, 145, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_93, 320, 170, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_94, 320, 195, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_95, 320, 220, 25, 25, 0, 0, 0 },
-  //13
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_96, 345, 45, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_97, 345, 70, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_98, 345, 95, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_99, 345, 120, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_100, 345, 145, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_101, 345, 170, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_86, 320, 170, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_87, 345, 170, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_88, 370, 170, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_89, 395, 170, 25, 25, 0, 0, 0 },
+  //7
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_90, 45, 195, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_91, 70, 195, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_92, 95, 195, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_93, 120, 195, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_94, 145, 195, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_95, 170, 195, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_96, 195, 195, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_97, 220, 195, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_98, 245, 195, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_99, 270, 195, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_100, 295, 195, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_101, 320, 195, 25, 25, 0, 0, 0 },
     { IMAGE_CreateIndirect, "Image", ID_IMAGE_102, 345, 195, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_103, 345, 220, 25, 25, 0, 0, 0 },
-  //14
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_104, 370, 45, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_105, 370, 70, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_106, 370, 95, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_107, 370, 120, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_108, 370, 145, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_109, 370, 170, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_110, 370, 195, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_111, 370, 220, 25, 25, 0, 0, 0 },
-  //15
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_112, 395, 45, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_113, 395, 70, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_114, 395, 95, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_115, 395, 120, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_116, 395, 145, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_117, 395, 170, 25, 25, 0, 0, 0 },
-    { IMAGE_CreateIndirect, "Image", ID_IMAGE_118, 395, 195, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_103, 370, 195, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_104, 395, 195, 25, 25, 0, 0, 0 },
+  //8
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_105, 45, 220, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_106, 70, 220, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_107, 95, 220, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_108, 120, 220, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_109, 145, 220, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_110, 170, 220, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_111, 195, 220, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_112, 220, 220, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_113, 245, 220, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_114, 270, 220, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_115, 295, 220, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_116, 320, 220, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_117, 345, 220, 25, 25, 0, 0, 0 },
+    { IMAGE_CreateIndirect, "Image", ID_IMAGE_118, 370, 220, 25, 25, 0, 0, 0 },
     { IMAGE_CreateIndirect, "Image", ID_IMAGE_119, 395, 220, 25, 25, 0, 0, 0 },
 };
 
@@ -241,8 +234,9 @@ static void _gameCbDialog(WM_MESSAGE * pMsg) {
   U32          FileSize;
   int          NCode;
   int          Id;
+  int          iterator;
   char         bomb_amount[12];
-  int          game_map[120] = { ID_WALL };
+  static char  game_map[120] = { ID_WALL };
   static char  buffer[300] = "00:00\r\n";
 
 
@@ -261,81 +255,86 @@ static void _gameCbDialog(WM_MESSAGE * pMsg) {
       EDIT_SetText(hItem, bomb_amount);
       for(int x = 0; x < pMsg->Data.v; x++){
         int location = rand() % ( 120 );
-        game_map[location] = ID_BOMB;
-        if(location - 15 > 0 && location + 15 < 119){ // NOT BORDER TOP || BOTTOM
-          switch(location % 15){
-            case 0: // BORDER LEFT
-              game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
-              game_map[location - 14] = (game_map[location - 14] >= 10 ) ? 10 : game_map[location - 14] + 1;
-              game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
-              game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
-              game_map[location + 16] = (game_map[location + 16] >= 10 ) ? 10 : game_map[location + 16] + 1;
-              break;
-            case 14: // BORDER RIGHT
-              game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
-              game_map[location - 16] = (game_map[location - 16] >= 10 ) ? 10 : game_map[location - 16] + 1;
-              game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
-              game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
-              game_map[location + 14] = (game_map[location + 14] >= 10 ) ? 10 : game_map[location + 14] + 1;
-              break;
-            default: // NOT BORDER LEFT OR RIGHT
-              game_map[location - 14] = (game_map[location - 14] >= 10 ) ? 10 : game_map[location - 14] + 1;
-              game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
-              game_map[location - 16] = (game_map[location - 16] >= 10 ) ? 10 : game_map[location - 16] + 1;
-              game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
-              game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
-              game_map[location + 14] = (game_map[location + 14] >= 10 ) ? 10 : game_map[location + 14] + 1;
-              game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
-              game_map[location + 16] = (game_map[location + 16] >= 10 ) ? 10 : game_map[location + 16] + 1;
-              break;
+        if(game_map[location] != ID_BOMB){
+          game_map[location] = ID_BOMB;   
+          printf("bomb at %d hehehe\r\n",location);
+          if(location - 15 > 0 && location + 15 < 119){ // NOT BORDER TOP || BOTTOM
+            switch(location % 15){
+              case 0: // BORDER LEFT
+                game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
+                game_map[location - 14] = (game_map[location - 14] >= 10 ) ? 10 : game_map[location - 14] + 1;
+                game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
+                game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
+                game_map[location + 16] = (game_map[location + 16] >= 10 ) ? 10 : game_map[location + 16] + 1;
+                break;
+              case 14: // BORDER RIGHT
+                game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
+                game_map[location - 16] = (game_map[location - 16] >= 10 ) ? 10 : game_map[location - 16] + 1;
+                game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
+                game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
+                game_map[location + 14] = (game_map[location + 14] >= 10 ) ? 10 : game_map[location + 14] + 1;
+                break;
+              default: // NOT BORDER LEFT OR RIGHT
+                game_map[location - 14] = (game_map[location - 14] >= 10 ) ? 10 : game_map[location - 14] + 1;
+                game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
+                game_map[location - 16] = (game_map[location - 16] >= 10 ) ? 10 : game_map[location - 16] + 1;
+                game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
+                game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
+                game_map[location + 14] = (game_map[location + 14] >= 10 ) ? 10 : game_map[location + 14] + 1;
+                game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
+                game_map[location + 16] = (game_map[location + 16] >= 10 ) ? 10 : game_map[location + 16] + 1;
+                break;
+            }
+          }
+          else{
+            if(location > 51){ // BORDER BOTTOM
+              switch(location % 15){
+                case 0: // BORDER LEFT
+                  game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
+                  game_map[location - 14] = (game_map[location - 14] >= 10 ) ? 10 : game_map[location - 14] + 1;
+                  game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
+                  break;
+                case 14: // BORDER RIGHT
+                  game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
+                  game_map[location - 16] = (game_map[location - 16] >= 10 ) ? 10 : game_map[location - 16] + 1;
+                  game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
+                  break;
+                default: // NOT BORDER LEFT OR RIGHT
+                  game_map[location - 14] = (game_map[location - 14] >= 10 ) ? 10 : game_map[location - 14] + 1;
+                  game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
+                  game_map[location - 16] = (game_map[location - 16] >= 10 ) ? 10 : game_map[location - 16] + 1;
+                  game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
+                  game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
+                  break;
+              }
+            }
+            else{ // BORDER TOP
+              switch(location % 15){
+                case 0: // BORDER LEFT
+                  game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
+                  game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
+                  game_map[location + 16] = (game_map[location + 16] >= 10 ) ? 10 : game_map[location + 16] + 1;
+                  break;
+                case 14: // BORDER RIGHT
+                  game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
+                  game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
+                  game_map[location + 14] = (game_map[location + 14] >= 10 ) ? 10 : game_map[location + 14] + 1;
+                  break;
+                default: // NOT BORDER LEFT OR RIGHT
+                  game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
+                  game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
+                  game_map[location + 14] = (game_map[location + 14] >= 10 ) ? 10 : game_map[location + 14] + 1;
+                  game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
+                  game_map[location + 16] = (game_map[location + 16] >= 10 ) ? 10 : game_map[location + 16] + 1;
+                  break;
+              }
+            }
           }
         }
         else{
-          if(location > 51){ // BORDER BOTTOM
-            switch(location % 15){
-              case 0: // BORDER LEFT
-                game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
-                game_map[location - 14] = (game_map[location - 14] >= 10 ) ? 10 : game_map[location - 14] + 1;
-                game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
-                break;
-              case 14: // BORDER RIGHT
-                game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
-                game_map[location - 16] = (game_map[location - 16] >= 10 ) ? 10 : game_map[location - 16] + 1;
-                game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
-                break;
-              default: // NOT BORDER LEFT OR RIGHT
-                game_map[location - 14] = (game_map[location - 14] >= 10 ) ? 10 : game_map[location - 14] + 1;
-                game_map[location - 15] = (game_map[location - 15] >= 10 ) ? 10 : game_map[location - 15] + 1;
-                game_map[location - 16] = (game_map[location - 16] >= 10 ) ? 10 : game_map[location - 16] + 1;
-                game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
-                game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
-                break;
-            }
-          }
-          else{ // BORDER TOP
-            switch(location % 15){
-              case 0: // BORDER LEFT
-                game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
-                game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
-                game_map[location + 16] = (game_map[location + 16] >= 10 ) ? 10 : game_map[location + 16] + 1;
-                break;
-              case 14: // BORDER RIGHT
-                game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
-                game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
-                game_map[location + 14] = (game_map[location + 14] >= 10 ) ? 10 : game_map[location + 14] + 1;
-                break;
-              default: // NOT BORDER LEFT OR RIGHT
-                game_map[location - 1]  = (game_map[location - 1]  >= 10 ) ? 10 : game_map[location - 1] + 1;
-                game_map[location + 1]  = (game_map[location + 1]  >= 10 ) ? 10 : game_map[location + 1] + 1;
-                game_map[location + 14] = (game_map[location + 14] >= 10 ) ? 10 : game_map[location + 14] + 1;
-                game_map[location + 15] = (game_map[location + 15] >= 10 ) ? 10 : game_map[location + 15] + 1;
-                game_map[location + 16] = (game_map[location + 16] >= 10 ) ? 10 : game_map[location + 16] + 1;
-                break;
-            }
-          }
+          printf("the number %d is taken roll again\r\n",location);
+          x--;
         }
-       
-        printf("bomb at %d hehehe\r\n",location);
       }
     }
     else{
@@ -358,7 +357,7 @@ static void _gameCbDialog(WM_MESSAGE * pMsg) {
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_0);
     TEXT_SetTextAlign(hItem, GUI_TA_HCENTER | GUI_TA_VCENTER);
     TEXT_SetFont(hItem, GUI_FONT_24B_ASCII);
-    TEXT_SetText(hItem, "WIN");
+    TEXT_SetText(hItem, " ");
     TEXT_SetTextColor(hItem, GUI_MAKE_COLOR(0x00BD1D00));
 
     //
